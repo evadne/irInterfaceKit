@@ -4,3 +4,4 @@
 //	Convenience Wrapper.
 
 @import "IRStyledView.j"
+@import "IRMouseView.j"
