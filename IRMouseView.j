@@ -24,7 +24,8 @@
 		@selector(mouseView:didReceiveMouseDownEvent:), true,
 		@selector(mouseView:didReceiveMouseDragEvent:), true,
 		@selector(mouseView:didReceiveMouseUpEvent:), true,
-		@selector(mouseView:didReceiveScrollWheelEvent:), true
+		@selector(mouseView:didReceiveScrollWheelEvent:), true,
+		@selector(mouseView:didReceiveMouseMoveEvent:), true
 
 	];
 	
@@ -34,10 +35,27 @@
 
 
 
+- (void) irSetDelegate:(id)delegateCandidate {
+	
+	[super irSetDelegate:delegateCandidate];	
+	
+}
+
 - (void) mouseDown:(CPEvent)event {
 	
 	if ([[self delegate] respondsToSelector:@selector(mouseView:didReceiveMouseDownEvent:)])
 	[[self delegate] mouseView:self didReceiveMouseDownEvent:event];
+	
+}
+
+
+
+
+
+- (void) mouseMoved:(CPEvent)anEvent {
+
+	if ([[self delegate] respondsToSelector:@selector(mouseView:didReceiveMouseMoveEvent:)])
+	[[self delegate] mouseView:self didReceiveMouseMoveEvent:event];
 	
 }
 
