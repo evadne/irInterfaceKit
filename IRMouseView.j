@@ -52,7 +52,7 @@
 
 
 
-- (void) mouseMoved:(CPEvent)anEvent {
+- (void) mouseMoved:(CPEvent)event {
 
 	if ([[self delegate] respondsToSelector:@selector(mouseView:didReceiveMouseMoveEvent:)])
 	[[self delegate] mouseView:self didReceiveMouseMoveEvent:event];
