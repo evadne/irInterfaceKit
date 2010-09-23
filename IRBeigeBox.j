@@ -26,9 +26,7 @@
 	self = [super initWithFrame:aFrame]; if (self == nil) return nil;
 	
 	[backgroundView setBackgroundNinePartPatternImageNamed:@"IRBeigeBox.backdrop" sliceTop:48 right:48 bottom:48 left:48 sender:self];
-	
-//	[self setBackgroundNinePartImageNamed:@"" sender:self];
-	
+		
 	return self;
 	
 }

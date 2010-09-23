@@ -2,6 +2,7 @@
 //	Evadne Wu at Iridia, 2010
 	
 @import <CGGeometry+IRAdditions/CGGeometry+IRAdditions.j>
+@import <CappExperiments/MethodSwizzle/MethodSwizzle.j>
 	
 	
 	
@@ -28,6 +29,8 @@
 	CPView backgroundView;
 	CPView contentView;
 	
+	BOOL hasUsedSwizzledFrame;
+	
 	CGRectOffset visualBoundsOffset;
 //	CGRect visualBounds;
 	
@@ -53,36 +56,64 @@
 - (IRStyledView) initWithFrame:(CGRect)frame {
 	
 	self = [super initWithFrame:frame]; if (self == nil) return nil;
-	[self setFrame:CGRectOffset(frame, [self visualBoundsOffset])];
-
-
-	var enlargedBackgroundViewFrame = CGRectOffset(CGRectMake(
-		
-		[self visualBoundsOffset].topOffset,
-		[self visualBoundsOffset].leftOffset,
-		frame.size.width,
-		frame.size.height
-		
-	), [self visualBoundsOffset]);
 	
-	backgroundView = [[CPView alloc] initWithFrame:enlargedBackgroundViewFrame];
-	
-	[backgroundView setBackroundColor:[CPColor blueColor]];
-	
-	contentView = [[CPView alloc] initWithFrame:CGRectMake(
-		
-		[self visualBoundsOffset].topOffset,
-		[self visualBoundsOffset].leftOffset,
-		frame.size.width,
-		frame.size.height
-		
-	)];
-	
+	backgroundView = [[CPView alloc] initWithFrame:CGRectMakeZero()];
+	contentView = [[CPView alloc] initWithFrame:CGRectMakeZero()];
 	
 	[self addSubview:backgroundView];	
 	[self addSubview:contentView];
 	
+	hasUsedSwizzledFrame = NO;
+	
+	[self setFrame:frame];
+	
 	return self;
+	
+}
+
+
+
+
+
+//	NOTICE THAT THE FOLLOWING METHODS ARE SWIZZLED.
+//	Calling setFrame actually invokes the implementation currently in swizzledSetFrame, callable by setFrame at runtime.
+//	The super implementation is hidden, callable by swizzledSetFrame at runtime.
+
+- (void) setFrame:(CGRect)frame {
+	
+	[super setFrame:frame];
+	
+}
+
+- (void) swizzledSetFrame:(CGRect)frame {
+	
+	var actualFrameToProcess = hasUsedSwizzledFrame ? CGRectOffset(frame, CGRectOffsetInvert([self visualBoundsOffset])) : frame;
+	
+	[self swizzledSetFrame:CGRectOffset(actualFrameToProcess, [self visualBoundsOffset])];
+
+	//	var enlargedBackgroundViewFrame = ;
+	
+	[backgroundView setFrame:CGRectOffset(CGRectMake(
+		
+		[self visualBoundsOffset].topOffset,
+		[self visualBoundsOffset].leftOffset,
+		actualFrameToProcess.size.width,
+		actualFrameToProcess.size.height
+		
+	), [self visualBoundsOffset])];
+	
+	[contentView setFrame:CGRectMake(
+		
+		[self visualBoundsOffset].topOffset,
+		[self visualBoundsOffset].leftOffset,
+		actualFrameToProcess.size.width,
+		actualFrameToProcess.size.height
+		
+	)];
+	
+	hasUsedSwizzledFrame = YES;
+	
+//	[super setFrame:frame];
 	
 }
 
@@ -121,3 +152,9 @@
 
 
 @end
+
+
+
+
+
+MethodSwizzle([IRStyledView class], @selector(setFrame:), @selector(swizzledSetFrame:));
