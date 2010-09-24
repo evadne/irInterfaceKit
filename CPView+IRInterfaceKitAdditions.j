@@ -1,10 +1,6 @@
 //	CPView+IRInterfaceKitAdditions.j
 //	Evadne Wu at Iridia, 2010
 
-
-
-
-
 @import <AppKit/CPView.j>
 
 
@@ -94,8 +90,16 @@
 }
 
 - (void) setVisualFrame:(CGRect)frame {
-	
+
 	[self setFrame:[self actualFrameForVisualFrame:frame]];
+	
+}
+
+- (CPView) initWithVisualFrame:(CGRect)frame {
+	
+	self = [self initWithFrame:frame]; if (self == nil) return;
+	[self setVisualFrame:frame];
+	return self;
 	
 }
 

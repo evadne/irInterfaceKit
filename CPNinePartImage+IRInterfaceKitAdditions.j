@@ -1,7 +1,7 @@
 //	CPNinePartImage+IRInterfaceKitAdditions.j
 //	Evadne Wu at Iridia, 2010
 	
-@import <AppKit/AppKit.j>
+@import <AppKit/CPImage.j>
 	
 	
 	

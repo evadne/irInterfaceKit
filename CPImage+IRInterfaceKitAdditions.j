@@ -1,6 +1,8 @@
 //	CPImage+IRInterfaceKitAdditions.j
 //	Evadne Wu
 	
+@import <AppKit/CPImage.j>
+
 	
 	
 	
