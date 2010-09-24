@@ -15,6 +15,12 @@
 	
 }
 
++ (CPImage) imageNamed:(CPString)imageName fromBundleResourcesOf:(id)sender {
+	
+	return [[[self class] alloc] initWithContentsOfFile:[[CPBundle bundleForClass:[sender class]] pathForResource:imageName]];
+	
+}
+
 @end
 
 
