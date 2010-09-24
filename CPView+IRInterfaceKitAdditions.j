@@ -61,12 +61,6 @@
 
 - (void) setBackgroundNinePartPatternImageNamed:(CPString)backgroundPatternImageName sliceTop:(float)topSliceWidth right:(float)rightSliceWidth bottom:(float)bottomSliceWidth left:(float)leftSliceWidth sender:(id)sender {
 	
-	CPLog(@"Working with sender %@.", sender);
-	
-	CPLog(@"Bundle for self’s class %@ is %@", CPStringFromClass([self class]), [CPBundle bundleForClass:[self class]]);
-	CPLog(@"Bundle for Class %@ is %@", CPStringFromClass([sender class]), [CPBundle bundleForClass:[sender class]]);
-	
-	
 	var image = function (index) {
 		
 		return [[CPBundle bundleForClass:[sender class]] pathForResource:backgroundPatternImageName + @"_0" + index + @".png"];

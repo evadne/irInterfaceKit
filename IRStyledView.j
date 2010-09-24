@@ -90,8 +90,6 @@
 	var actualFrameToProcess = hasUsedSwizzledFrame ? CGRectOffset(frame, CGRectOffsetInvert([self visualBoundsOffset])) : frame;
 	
 	[self swizzledSetFrame:CGRectOffset(actualFrameToProcess, [self visualBoundsOffset])];
-
-	//	var enlargedBackgroundViewFrame = ;
 	
 	[backgroundView setFrame:CGRectOffset(CGRectMake(
 		
@@ -112,8 +110,6 @@
 	)];
 	
 	hasUsedSwizzledFrame = YES;
-	
-//	[super setFrame:frame];
 	
 }
 

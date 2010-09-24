@@ -17,11 +17,15 @@
 	@import "IRBubbleBox.j"
 	@import "IRYellowBox.j"
 	
+	@import "IRTextField.j"
+	
 	@import "IRSkinnyScrollView.j"
 	
 	@import "IRHUDButton.j"
 	@import "IRHUDButtonBar.j"
 	@import "IRHUDSearchField.j"
+	
+	@import "IROverlayFullPlatformWindow.j"
 	
 	
 	
