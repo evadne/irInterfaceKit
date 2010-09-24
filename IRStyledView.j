@@ -22,9 +22,7 @@
 
 
 - (IRStyledView) initWithFrame:(CGRect)frame {
-	
-	CGRectDump(frame, @"-initWithFrame called with frame");
-	
+		
 	self = [super initWithFrame:frame]; if (self == nil) return nil;
 	
 	backgroundView = [[CPView alloc] initWithFrame:CGRectMakeZero()];
@@ -32,8 +30,6 @@
 	
 	[self addSubview:backgroundView];	
 	[self addSubview:contentView];
-	
-	hasUsedSwizzledFrame = NO;
 	
 	[self setFrame:frame];
 	
@@ -50,7 +46,6 @@
 	[super setFrame:frame];
 	
 	var fullFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-	
 	[backgroundView setFrame:fullFrame];
 	[contentView setFrame:CGRectOffset(fullFrame, CGRectOffsetInvert([self visualBoundsOffset]))];
 	
@@ -65,6 +60,3 @@
 
 
 
-
-// MethodSwizzle([IRStyledView class], @selector(frame), @selector(swizzledFrame));
-// MethodSwizzle([IRStyledView class], @selector(setFrame:), @selector(swizzledSetFrame:));
