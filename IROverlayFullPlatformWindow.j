@@ -17,7 +17,7 @@
 	if (self == nil) return nil;
 	
 	[self setFullPlatformWindow:YES];
-	[[self contentView] setBackgroundColor:[CPColor colorWithWhite:0.0 alpha:0.25]];
+	[[self contentView] setBackgroundColor:[CPColor colorWithWhite:0.0 alpha:0.75]];
 	
 	return self;
 	
