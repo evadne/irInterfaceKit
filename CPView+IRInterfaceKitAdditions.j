@@ -61,29 +61,80 @@
 
 - (void) setBackgroundNinePartPatternImageNamed:(CPString)backgroundPatternImageName sliceTop:(float)topSliceWidth right:(float)rightSliceWidth bottom:(float)bottomSliceWidth left:(float)leftSliceWidth sender:(id)sender {
 	
-	var image = function (index) {
-		
-		return [[CPBundle bundleForClass:[sender class]] pathForResource:backgroundPatternImageName + @"_0" + index + @".png"];
-		
-	}
+	[self setBackgroundColor:[CPColor colorWithPatternImage:[CPNinePartImage imageWithBaseName:backgroundPatternImageName inBundle:[CPBundle bundleForClass:[sender class]] withInset:CGInsetMake(topSliceWidth, rightSliceWidth, bottomSliceWidth, leftSliceWidth)]]];
 	
-//	Photoshop conventions
+}
+
+
+
+
+
+- (CGRectOffset) visualBoundsOffset {
 	
-	[self setBackgroundColor:[CPColor colorWithPatternImage:[[CPNinePartImage alloc] initWithImageSlices:[
+//	Override point for offset’d backdropped views.  A negative value in the offset means centrifugal.
+//	i.e., a positive top offset means the final top border is higher than the previous border.	
+	
+	return CGRectOffsetZero();
+	
+}
 
-		[[CPImage alloc] initWithContentsOfFile:image("1") size:CGSizeMake(leftSliceWidth, topSliceWidth)],
-		[[CPImage alloc] initWithContentsOfFile:image("2") size:CGSizeMake(1.0, topSliceWidth)],
-		[[CPImage alloc] initWithContentsOfFile:image("3") size:CGSizeMake(rightSliceWidth, topSliceWidth)],
+- (CGRect) visualFrame {
+	
+	var returnFrame = CGRectMake(
+	
+		[self frame].origin.x + [self visualBoundsOffset].topOffset,
+		[self frame].origin.y + [self visualBoundsOffset].leftOffset,	
+		[contentView frame].size.width,
+		[contentView frame].size.height
+		
+	);
+	
+	return returnFrame;
+	
+}
 
-		[[CPImage alloc] initWithContentsOfFile:image("4") size:CGSizeMake(leftSliceWidth, 1.0)],
-		[[CPImage alloc] initWithContentsOfFile:image("5") size:CGSizeMake(1.0, 1.0)],
-		[[CPImage alloc] initWithContentsOfFile:image("6") size:CGSizeMake(rightSliceWidth, 1.0)],
+- (void) setVisualFrame:(CGRect)frame {
+	
+	[self setFrame:[self actualFrameForVisualFrame:frame]];
+	
+}
 
-		[[CPImage alloc] initWithContentsOfFile:image("7") size:CGSizeMake(leftSliceWidth, bottomSliceWidth)],
-		[[CPImage alloc] initWithContentsOfFile:image("8") size:CGSizeMake(1.0, bottomSliceWidth)],
-		[[CPImage alloc] initWithContentsOfFile:image("9") size:CGSizeMake(rightSliceWidth, bottomSliceWidth)]
-			
-	]]]];
+- (CGRect) actualFrameForVisualFrame:(CGRect)frame {
+	
+	return CGRectOffset(frame, [self visualBoundsOffset]);
+	
+}
+
+
+
+
+- (void) centerHorizontallyInSuperview {
+	
+	if ([self superview] == nil) return;
+	
+	[self setCenter:CGPointMake(
+		
+		[[self superview] frame].size.width / 2,
+		[self center].y
+		
+	)];
+	
+}
+
+
+
+
+
+- (void) centerVerticallyInSuperview {
+	
+	if ([self superview] == nil) return;
+	
+	[self setCenter:CGPointMake(
+		
+		[self center].x,
+		[[self superview] frame].size.height / 2
+		
+	)];
 	
 }
 

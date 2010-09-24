@@ -10,6 +10,8 @@
 //	Custom Styled Views
 	
 	@import "CPView+IRInterfaceKitAdditions.j"
+	@import "CPNinePartImage+IRInterfaceKitAdditions.j"
+	@import "CPImage+IRInterfaceKitAdditions.j"
 	
 	
 	@import "IRStyledView.j"
@@ -17,7 +19,7 @@
 	@import "IRBubbleBox.j"
 	@import "IRYellowBox.j"
 	
-	@import "IRTextField.j"
+	@import "IRDarkTextField.j"
 	
 	@import "IRSkinnyScrollView.j"
 	
