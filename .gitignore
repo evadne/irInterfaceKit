@@ -1,1 +1,31 @@
+
+
+
+
+
+#	OS X Convenience is not stored
+
 .DS_Store
+
+
+#	Textmate project is not stored
+
+IRInterfaceKit.tmproj
+
+
+#	Slices are NOT stored.
+#	Call Script/slicer to reslice using pictorial.
+
+Resources/*_1.png
+Resources/*_2.png
+Resources/*_3.png
+Resources/*_4.png
+Resources/*_5.png
+Resources/*_6.png
+Resources/*_7.png
+Resources/*_8.png
+Resources/*_9.png
+
+
+
+
