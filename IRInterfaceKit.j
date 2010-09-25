@@ -24,7 +24,8 @@
 	@import "IRDarkTextField.j"
 	
 	@import "IRSkinnyScrollView.j"
-	
+
+	@import "IRTactileNextButton.j"	
 	@import "IRHUDButton.j"
 	@import "IRHUDButtonBar.j"
 	@import "IRHUDSearchField.j"
