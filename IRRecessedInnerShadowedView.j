@@ -30,17 +30,9 @@
 
 - (IRRecessedInnerShadowedView) initWithFrame:(CGRect)frame {
 	
-	CGRectDump(frame, @"IRRecessedInnerShadowedView initWithFrame");
-	
-	CPLog(@"top backdrop %@", [CPImage imageNamed:@"IRRecessedInnerShadowedView.topBackdrop.png" fromBundleResourcesOf:self]);
-	
 	self = [super initWithFrame:frame]; if (self == nil) return nil;
 	
 	[self setFrame:frame];
-	
-	[self setWantsLayer:YES];
-	[self setLayer:[CALayer layer]];
-	[[self layer] setBounds:frame];
 	
 	var fullFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
 
@@ -53,12 +45,15 @@
 
 	[backgroundView addSubview:backgroundViewBaseView];
 	
-	var topBackdropView = [[CPImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 32)];
+	var topBackdropView = [[CPImageView alloc] initWithFrame:CGRectMake(0, -32, frame.size.width, 32)];
 	[topBackdropView setImage:[CPImage imageNamed:@"IRRecessedInnerShadowedView.topBackdrop.png" fromBundleResourcesOf:self]];
+	[topBackdropView setAutoresizingMask:CPViewMinXMargin|CPViewMaxXMargin|CPViewMinYMargin];
+	
 	[backgroundView addSubview:topBackdropView];		
 
 	var bottomBackdropView = [[CPImageView alloc] initWithFrame:CGRectMake(0, frame.size.height, frame.size.width, 32)];
 	[bottomBackdropView setImage:[CPImage imageNamed:@"IRRecessedInnerShadowedView.bottomBackdrop.png" fromBundleResourcesOf:self]];
+	[bottomBackdropView setAutoresizingMask:CPViewMinXMargin|CPViewMaxXMargin|CPViewMaxYMargin];
 	[backgroundView addSubview:bottomBackdropView];		
 
 	return self;
