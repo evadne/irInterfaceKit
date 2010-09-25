@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+function slice () {
+
+	`pwd`/`dirname $0`/../Externals/pictorial/slicer.rb "`pwd`/`dirname $0`/../Resources/$1" $2 $3 $4 $5
+
+}
+
+slice IRTactileNextButton.backdrop.png 20 28 20 20 
+
+# `pwd`/`dirname $0`/../externals/pictorial/slicer.rb --overwrite-existing-file --from-directory "`pwd`/`dirname $0`/../design" --to-directory "`pwd`/`dirname $0`/../preview" --rename-from "miPush.scaffold_(.+).png$" --rename-to "\\1.png"
+
+
+
+
