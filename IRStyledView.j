@@ -13,8 +13,6 @@
 	CPView backgroundView;
 	CPView contentView @accessors(readonly);
 	
-	BOOL hasUsedSwizzledFrame;
-	
 }
 
 
@@ -25,29 +23,15 @@
 		
 	self = [super initWithFrame:frame]; if (self == nil) return nil;
 	
-	backgroundView = [[CPView alloc] initWithFrame:CGRectMakeZero()];
-	contentView = [[CPView alloc] initWithFrame:CGRectMakeZero()];
-	
+	var fullFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+
+	backgroundView = [[CPView alloc] initWithFrame:fullFrame];
 	[self addSubview:backgroundView];	
+
+	contentView = [[CPView alloc] initWithFrame:fullFrame];	
 	[self addSubview:contentView];
 	
-	[self setFrame:frame];
-	
 	return self;
-	
-}
-
-
-
-
-
-- (void) setFrame:(CGRect)frame {
-	
-	[super setFrame:frame];
-	
-	var fullFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-	[backgroundView setFrame:fullFrame];
-	[contentView setFrame:CGRectOffset(fullFrame, CGRectOffsetInvert([self visualBoundsOffset]))];
 	
 }
 
