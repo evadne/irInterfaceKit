@@ -146,6 +146,23 @@
 
 
 
+- (void) centerInSuperview {
+	
+	if ([self superview] == nil) return;
+	
+	[self setCenter:CGPointMake(
+		
+		[[self superview] frame].size.width / 2,
+		[[self superview] frame].size.height / 2
+		
+	)];
+	
+}
+
+
+
+
+
 @end
 
 
