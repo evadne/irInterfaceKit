@@ -25,8 +25,8 @@
 	[button setValue:CGSizeMake(0.0, -1.0) forThemeAttribute:@"text-shadow-offset"];
 	
 	[button setValue:[CPColor colorWithPatternImage:[CPNinePartImage imageWithBaseName:@"IRTactileNextButton.backdrop" inBundle:[CPBundle bundleForClass:[self class]] withInset:CGInsetMake(20, 28, 20, 20)]] forThemeAttribute:@"bezel-color"];
-	[button setValue:CGInsetMake(0, 28, 0, 24) forThemeAttribute:@"content-inset"];
 	
+	[button setValue:CGInsetMake(0, 28, 0, 24) forThemeAttribute:@"content-inset"];
 	[button setValue:CGInsetMake(-16, -8, -16, -16) forThemeAttribute:@"bezel-inset"];
 	
 	[button setValue:CGSizeMake(0.0, 32.0) forThemeAttribute:@"min-size"];

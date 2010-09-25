@@ -31,6 +31,8 @@
 	contentView = [[CPView alloc] initWithFrame:fullFrame];	
 	[self addSubview:contentView];
 	
+	[self setClipsToBounds:NO];
+	
 	return self;
 	
 }
