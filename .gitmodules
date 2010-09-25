@@ -1,0 +1,3 @@
+[submodule "Externals/pictorial"]
+	path = Externals/pictorial
+	url = git://github.com/monoceroi/pictorial.git
