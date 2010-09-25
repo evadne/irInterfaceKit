@@ -7,9 +7,9 @@
 	
 @implementation IRDarkTextField : CPTextField
 
-+ (IRTextField) textFieldWithStringValue:(CPString)aStringValue placeholder:(CPString)aPlaceholder width:(float)aWidth theme:(CPTheme)aTheme {
++ (IRTextField) textFieldWithStringValue:(CPString)aStringValue placeholder:(CPString)aPlaceholder width:(float)aWidth {
 
-	var textField = [super textFieldWithStringValue:aStringValue placeholder:aPlaceholder width:aWidth theme:aTheme]
+	var textField = [super textFieldWithStringValue:aStringValue placeholder:aPlaceholder width:aWidth theme:[CPTheme defaultTheme]]
 	[textField setFrame:CGRectMake(0.0, 0.0, aWidth, 32.0)];
 	
 	[textField setValue:[CPColor blueColor] forThemeAttribute:@"bezel-color"];
