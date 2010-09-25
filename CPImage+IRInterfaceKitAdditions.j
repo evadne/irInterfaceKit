@@ -11,11 +11,13 @@
 
 + (CPImage) bundledImageNamed:(CPString)imageName {
 	
-	return [[[self class] alloc] initWithContentsOfFile:[[CPBundle mainBundle] pathForResource:imageName]];
+	return [CPImage imageNamed:imageName inBundleOf:[CPApp delegate]];
+	
+//	return [[[self class] alloc] initWithContentsOfFile:[[CPBundle mainBundle] pathForResource:imageName]];
 	
 }
 
-+ (CPImage) imageNamed:(CPString)imageName fromBundleResourcesOf:(id)sender {
++ (CPImage) imageNamed:(CPString)imageName inBundleOf:(id)sender {
 	
 	return [[[self class] alloc] initWithContentsOfFile:[[CPBundle bundleForClass:[sender class]] pathForResource:imageName]];
 	

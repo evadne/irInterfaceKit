@@ -35,4 +35,10 @@
 	
 }
 
++ (CPNinePartImage) imageWithBaseName:(CPString)baseName inBundleOf:(id)sender withInset:(CGInset)inset {
+	
+	return [CPNinePartImage imageWithBaseName:baseName inBundle:[CPBundle bundleForClass:[sender class]] withInset:inset];
+	
+}
+
 @end
