@@ -19,9 +19,12 @@
 	
 	[textField setValue:[CPColor colorWithPatternImage:[CPNinePartImage imageWithBaseName:@"IRDarkTextField.backdrop" inBundle:[CPBundle bundleForClass:[self class]] withInset:CGInsetMake(12, 12, 12, 12)]] forThemeAttribute:@"bezel-color" inState:CPThemeStateBezeled];
 	
-	[textField setValue:CGInsetMake(12, 20, 12, 20) forThemeAttribute:@"content-inset" inState:CPThemeStateBezeled&CPThemeStateEditing];
+	[textField setValue:[CPColor colorWithPatternImage:[CPNinePartImage imageWithBaseName:@"IRDarkTextField.active.backdrop" inBundle:[CPBundle bundleForClass:[self class]] withInset:CGInsetMake(12, 12, 12, 12)]] forThemeAttribute:@"bezel-color" inState:CPThemeStateBezeled|CPThemeStateEditing];
+		
+	[textField setValue:CGInsetMake(12, 20, 12, 20) forThemeAttribute:@"content-inset" inState:CPThemeStateBezeled];
+	[textField setValue:CGInsetMake(13, 20, 11, 20) forThemeAttribute:@"content-inset" inState:CPThemeStateEditing];
 
-	[textField setValue:CGInsetMake(4, 4, 4, 4) forThemeAttribute:@"bezel-inset" inState:CPThemeStateBezeled&CPThemeStateEditing];
+	[textField setValue:CGInsetMake(4, -8, 4, -8) forThemeAttribute:@"bezel-inset" inState:CPThemeStateBezeled&CPThemeStateEditing];
 	
 	[textField setValue:[CPFont boldSystemFontOfSize:12.0] forThemeAttribute:@"font" inState:CPThemeStateBezeled];
 	[textField setValue:[CPColor colorWithWhite:1 alpha:1] forThemeAttribute:"text-color" inState:CPThemeStateBezeled];
