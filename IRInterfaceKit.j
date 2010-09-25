@@ -12,6 +12,7 @@
 	@import "CPView+IRInterfaceKitAdditions.j"
 	@import "CPNinePartImage+IRInterfaceKitAdditions.j"
 	@import "CPImage+IRInterfaceKitAdditions.j"
+	@import "CPString+IRInterfaceKitAdditions.j"
 	
 	
 	@import "IRStyledView.j"
