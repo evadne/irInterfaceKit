@@ -37,7 +37,7 @@
 
 //	Buttons and Button Bars
 	
-	@import "IRTactileNextButton.j"	
+	@import "IRTactileContinueButton.j"	
 	@import "IRHUDButton.j"
 	@import "IRHUDButtonBar.j"
 

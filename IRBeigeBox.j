@@ -19,9 +19,9 @@
 
 	self = [super initWithFrame:aFrame]; if (self == nil) return nil;
 	
-	[backgroundView setBackgroundNinePartPatternImageNamed:@"IRBeigeBox.backdrop" sliceTop:48 right:48 bottom:48 left:48 sender:self];
+	[backgroundView setBackgroundNinePartPatternImageNamed:@"IRBeigeBox.backdrop" sliceTop:24 right:24 bottom:24 left:24 sender:self];
 	
-	[backgroundView setFrame:CGRectOffset(CGRectMake(0, 0, aFrame.size.width, aFrame.size.height), CGRectOffsetMake(32, 32, 32, 32))];
+	[backgroundView setFrame:CGRectOffset(CGRectMake(0, 0, aFrame.size.width, aFrame.size.height), CGRectOffsetMake(16, 16, 16, 16))];
 			
 	return self;
 	

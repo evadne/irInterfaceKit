@@ -6,10 +6,32 @@ function slice () {
 
 }
 
-slice IRTactileNextButton.backdrop.png 20 28 20 20 
-
-# `pwd`/`dirname $0`/../externals/pictorial/slicer.rb --overwrite-existing-file --from-directory "`pwd`/`dirname $0`/../design" --to-directory "`pwd`/`dirname $0`/../preview" --rename-from "miPush.scaffold_(.+).png$" --rename-to "\\1.png"
 
 
 
+
+slice IRTactileContinueButton.backdrop.png 20 40 20 20 
+slice IRTactileContinueButton.backdrop.active.png 20 40 20 20 
+slice IRTactileContinueButton.backdrop.disabled.png 20 40 20 20 
+
+slice IRTactileNoOpButton.backdrop.png 20 20 20 20 
+slice IRTactileNoOpButton.backdrop.active.png 20 20 20 20
+slice IRTactileNoOpButton.backdrop.disabled.png 20 20 20 20
+
+slice IRTactileSecondActionButton.backdrop.png 20 20 20 20 
+slice IRTactileSecondActionButton.backdrop.active.png 20 20 20 20
+slice IRTactileSecondActionButton.backdrop.disabled.png 20 20 20 20
+
+slice IRTactilePreviousButton.backdrop.png 20 20 20 40
+slice IRTactilePreviousButton.backdrop.active.png 20 20 20 40
+slice IRTactilePreviousButton.backdrop.disabled.png 20 20 20 40
+
+slice IRTactileDoneButton.backdrop.png 20 20 20 20 
+slice IRTactileDoneButton.backdrop.active.png 20 20 20 20
+slice IRTactileDoneButton.backdrop.disabled.png 20 20 20 20
+
+slice IRBeigebox.backdrop.png 24 24 24 24
+
+slice IRDarkTextField.backdrop.png 12 12 12 12
+slice IRDarkTextField.backdrop.active.png 12 12 12 12
 

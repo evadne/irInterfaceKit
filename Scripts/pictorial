@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+`pwd`/`dirname $0`/../Externals/pictorial/pictorial.rb --overwrite-existing-file --from-directory "`pwd`/`dirname $0`/../Design" --to-directory "`pwd`/`dirname $0`/../Resources" --rename-from "IRInterfaceKit_(.+).png$" --rename-to "\\1.png"
+
+
+
+

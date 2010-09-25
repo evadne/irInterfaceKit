@@ -13,7 +13,7 @@
 	
 	var image = function (index) {
 		
-		return [bundle pathForResource:baseName + @"_0" + index + @".png"];
+		return [bundle pathForResource:baseName + @"_" + index + @".png"];
 		
 	}
 		

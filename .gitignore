@@ -13,6 +13,10 @@
 IRInterfaceKit.tmproj
 
 
+#	PNGs from the Design directory is not stored
+
+Design/*.png*
+
 #	Slices are NOT stored.
 #	Call Script/slicer to reslice using pictorial.
 
@@ -25,6 +29,16 @@ Resources/*_6.png
 Resources/*_7.png
 Resources/*_8.png
 Resources/*_9.png
+
+#	Also ignore:
+
+IRTactileContinueButton.*.png
+IRTactileNoOpButton.*.png
+IRTactileSecondActionButton.*.png
+IRTactilePreviousButton.*.png
+IRTactileDoneButton.*.png
+IRBeigebox.*.png
+IRDarkTextField.*.png
 
 
 

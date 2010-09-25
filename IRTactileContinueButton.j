@@ -5,7 +5,7 @@
 	
 	
 	
-@implementation IRTactileNextButton : CPButton {
+@implementation IRTactileContinueButton : CPButton {
 	
 	
 	
@@ -24,10 +24,12 @@
 	[button setValue:[CPColor colorWithWhite:0.0 alpha:1.0] forThemeAttribute:@"text-shadow-color"];
 	[button setValue:CGSizeMake(0.0, -1.0) forThemeAttribute:@"text-shadow-offset"];
 	
-	[button setValue:[CPColor colorWithPatternImage:[CPNinePartImage imageWithBaseName:@"IRTactileNextButton.backdrop" inBundle:[CPBundle bundleForClass:[self class]] withInset:CGInsetMake(20, 28, 20, 20)]] forThemeAttribute:@"bezel-color"];
+	[button setValue:[CPColor colorWithPatternImage:[CPNinePartImage imageWithBaseName:@"IRTactileContinueButton.backdrop" inBundle:[CPBundle bundleForClass:[self class]] withInset:CGInsetMake(20, 36, 20, 20)]] forThemeAttribute:@"bezel-color"];
+
+	[button setValue:[CPColor colorWithPatternImage:[CPNinePartImage imageWithBaseName:@"IRTactileContinueButton.backdrop.active" inBundle:[CPBundle bundleForClass:[self class]] withInset:CGInsetMake(20, 36, 20, 20)]] forThemeAttribute:@"bezel-color" inState:CPThemeStateHighlighted];
 	
 	[button setValue:CGInsetMake(0, 28, 0, 24) forThemeAttribute:@"content-inset"];
-	[button setValue:CGInsetMake(-16, -8, -16, -16) forThemeAttribute:@"bezel-inset"];
+	[button setValue:CGInsetMake(-16, -12, -16, -16) forThemeAttribute:@"bezel-inset"];
 	
 	[button setValue:CGSizeMake(0.0, 32.0) forThemeAttribute:@"min-size"];
 	[button setValue:CGSizeMake(-1.0, 32.0) forThemeAttribute:@"max-size"];

@@ -16,7 +16,7 @@
 
 	[textField setBezeled:YES];	
 	[textField setValue:[CPColor colorWithPatternImage:[CPNinePartImage imageWithBaseName:@"IRDarkTextField.backdrop" inBundleOf:self withInset:CGInsetMake(12, 12, 12, 12)]] forThemeAttribute:@"bezel-color"];
-	[textField setValue:[CPColor colorWithPatternImage:[CPNinePartImage imageWithBaseName:@"IRDarkTextField.active.backdrop" inBundle:[CPBundle bundleForClass:[self class]] withInset:CGInsetMake(12, 12, 12, 12)]] forThemeAttribute:@"bezel-color" inState:CPThemeStateEditing];
+	[textField setValue:[CPColor colorWithPatternImage:[CPNinePartImage imageWithBaseName:@"IRDarkTextField.backdrop.active" inBundle:[CPBundle bundleForClass:[self class]] withInset:CGInsetMake(12, 12, 12, 12)]] forThemeAttribute:@"bezel-color" inState:CPThemeStateEditing];
 		
 	[textField setValue:CGInsetMake(8, 8, 8, 8) forThemeAttribute:@"content-inset"];
 	[textField setValue:CGInsetMake(-8, -8, -8, -8) forThemeAttribute:@"bezel-inset"];
