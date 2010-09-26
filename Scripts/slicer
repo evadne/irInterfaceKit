@@ -30,7 +30,7 @@ slice IRTactileDoneButton.backdrop.png 20 20 20 20
 slice IRTactileDoneButton.backdrop.active.png 20 20 20 20
 slice IRTactileDoneButton.backdrop.disabled.png 20 20 20 20
 
-slice IRBeigebox.backdrop.png 24 24 24 24
+slice IRBeigeBox.backdrop.png 24 24 24 24
 
 slice IRDarkTextField.backdrop.png 12 12 12 12
 slice IRDarkTextField.backdrop.active.png 12 12 12 12
