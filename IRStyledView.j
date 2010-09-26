@@ -2,7 +2,6 @@
 //	Evadne Wu at Iridia, 2010
 	
 @import <CGGeometry+IRAdditions/CGGeometry+IRAdditions.j>
-@import <CappExperiments/MethodSwizzle/MethodSwizzle.j>
 	
 	
 	
