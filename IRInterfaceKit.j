@@ -22,6 +22,7 @@
 	@import "IRBeigeBox.j"
 	@import "IRBubbleBox.j"
 	@import "IRYellowBox.j"
+	@import "IRCautionBox.j"
 
 
 //	Text Fields
