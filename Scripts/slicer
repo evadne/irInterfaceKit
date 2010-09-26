@@ -35,3 +35,7 @@ slice IRBeigeBox.backdrop.png 24 24 24 24
 slice IRDarkTextField.backdrop.png 12 12 12 12
 slice IRDarkTextField.backdrop.active.png 12 12 12 12
 
+slice IRCautionBox.backdrop.overlay.png 20 20 20 20
+#     IRCautionBox.backdrop.stripes.png is a pattern image
+slice IRCautionBox.backdrop.base.png 20 20 20 20
+
