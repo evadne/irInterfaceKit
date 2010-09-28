@@ -10,7 +10,6 @@
 //	Additions
 	
 	@import "CPView+IRInterfaceKitAdditions.j"
-	@import "CPNinePartImage+IRInterfaceKitAdditions.j"
 	@import "CPImage+IRInterfaceKitAdditions.j"
 	@import "CPString+IRInterfaceKitAdditions.j"
 	
@@ -23,6 +22,7 @@
 	@import "IRBubbleBox.j"
 	@import "IRYellowBox.j"
 	@import "IRCautionBox.j"
+	@import "IRRazorView.j"
 
 
 //	Text Fields
@@ -34,6 +34,7 @@
 //	Scroll Views
 	
 	@import "IRSkinnyScrollView.j"
+	@import "IRSkinnyScroller.j"
 
 
 //	Buttons and Button Bars

@@ -39,3 +39,12 @@ slice IRCautionBox.backdrop.overlay.png 20 20 20 20
 #     IRCautionBox.backdrop.stripes.png is a pattern image
 slice IRCautionBox.backdrop.base.png 20 20 20 20
 
+slice IRSkinnyScroller.dark.backdrop.vertical.png 8 0 8 0
+slice IRSkinnyScroller.dark.backdrop.vertical.active.png 8 0 8 0
+slice IRSkinnyScroller.light.backdrop.vertical.png 8 0 8 0
+slice IRSkinnyScroller.light.backdrop.vertical.active.png 8 0 8 0
+
+slice IRSkinnyScroller.dark.backdrop.horizontal.png  0 8 0 8
+slice IRSkinnyScroller.dark.backdrop.horizontal.active.png  0 8 0 8
+slice IRSkinnyScroller.light.backdrop.horizontal.png 0 8 0 8
+slice IRSkinnyScroller.light.backdrop.horizontal.active.png 0 8 0 8
