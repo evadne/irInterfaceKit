@@ -8,13 +8,38 @@
 	
 	
 	
-@implementation IRSkinnyScrollView : CPScrollView
+@implementation IRSkinnyScrollView : CPScrollView {
+	
+	BOOL invertedColor;
+	
+}
+
+
+
+
+
+- (void) setInvertedColor:(BOOL)flag {
+	
+	[_verticalScroller setInvertedColor:flag];
+	[_horizontalScroller setInvertedColor:flag];
+	
+	invertedColor = flag;
+	
+}
+
+- (BOOL) invertedColor {
+	
+	return invertedColor;
+	
+}
 
 
 
 
 
 - (void) reflectScrolledClipView:(CPClipView)aClipView {
+	
+//	[self setInvertedColor:(invertedColor || NO)];
 	
 	if(_contentView !== aClipView) return;
 	if (_recursionCount > 5) return;
@@ -181,6 +206,8 @@
 			
 		)]];
 		
+		[[self horizontalScroller] setInvertedColor:invertedColor];
+		
 		[[self horizontalScroller] setFrameSize:CGSizeMake(
 			
 			CGRectGetWidth([self bounds]), 
@@ -214,6 +241,8 @@
 			MAX(CGRectGetHeight([self bounds]), [IRSkinnyScroller scrollerWidth]+1)
 			
 		)]];
+		
+		[[self verticalScroller] setInvertedColor:invertedColor];
 		
 		[[self verticalScroller] setFrameSize:CGSizeMake(
 			

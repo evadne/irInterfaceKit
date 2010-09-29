@@ -51,15 +51,46 @@
 	[self setValue:[CPNull null] forThemeAttribute:@"increment-line-color"];
 	[self setValue:[CPNull null] forThemeAttribute:@"decrement-line-color"];
 
-	[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.dark.backdrop.horizontal" inBundleOf:self withInset:CGInsetMake(0.0, 8.0, 0.0, 8.0) thickness:24.0 vertical:NO]] forThemeAttribute:@"knob-color"];
-
-	[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.dark.backdrop.horizontal.active" inBundleOf:self withInset:CGInsetMake(0.0, 8.0, 0.0, 8.0) thickness:24.0 vertical:NO]] forThemeAttribute:@"knob-color" inState:CPThemeStateHighlighted];
-
-	[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.dark.backdrop.vertical" inBundleOf:self withInset:CGInsetMake(8.0, 0.0, 8.0, 0.0) thickness:24.0 vertical:YES]] forThemeAttribute:@"knob-color" inState:CPThemeStateVertical];
-	
-	[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.dark.backdrop.vertical.active" inBundleOf:self withInset:CGInsetMake(8.0, 0.0, 8.0, 0.0) thickness:24.0 vertical:YES]] forThemeAttribute:@"knob-color" inState:CPThemeStateVertical|CPThemeStateHighlighted];
 	  
 	return self;
+	
+}
+
+
+
+
+
+- (BOOL) invertedColor {
+	
+	return invertedColor;
+	
+}
+
+- (void) setInvertedColor:(BOOL)flag {
+	
+	invertedColor = flag;
+	
+	if (invertedColor) {
+		
+		[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.light.backdrop.horizontal" inBundleOf:self withInset:CGInsetMake(0.0, 8.0, 0.0, 8.0) thickness:24.0 vertical:NO]] forThemeAttribute:@"knob-color"];
+
+		[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.light.backdrop.horizontal.active" inBundleOf:self withInset:CGInsetMake(0.0, 8.0, 0.0, 8.0) thickness:24.0 vertical:NO]] forThemeAttribute:@"knob-color" inState:CPThemeStateHighlighted];
+
+		[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.light.backdrop.vertical" inBundleOf:self withInset:CGInsetMake(8.0, 0.0, 8.0, 0.0) thickness:24.0 vertical:YES]] forThemeAttribute:@"knob-color" inState:CPThemeStateVertical];
+	
+		[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.light.backdrop.vertical.active" inBundleOf:self withInset:CGInsetMake(8.0, 0.0, 8.0, 0.0) thickness:24.0 vertical:YES]] forThemeAttribute:@"knob-color" inState:CPThemeStateVertical|CPThemeStateHighlighted];
+		
+	} else {
+			
+		[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.dark.backdrop.horizontal" inBundleOf:self withInset:CGInsetMake(0.0, 8.0, 0.0, 8.0) thickness:24.0 vertical:NO]] forThemeAttribute:@"knob-color"];
+
+		[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.dark.backdrop.horizontal.active" inBundleOf:self withInset:CGInsetMake(0.0, 8.0, 0.0, 8.0) thickness:24.0 vertical:NO]] forThemeAttribute:@"knob-color" inState:CPThemeStateHighlighted];
+
+		[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.dark.backdrop.vertical" inBundleOf:self withInset:CGInsetMake(8.0, 0.0, 8.0, 0.0) thickness:24.0 vertical:YES]] forThemeAttribute:@"knob-color" inState:CPThemeStateVertical];
+	
+		[self setValue:[CPColor colorWithPatternImage:[CPThreePartImage imageWithBaseName:@"IRSkinnyScroller.dark.backdrop.vertical.active" inBundleOf:self withInset:CGInsetMake(8.0, 0.0, 8.0, 0.0) thickness:24.0 vertical:YES]] forThemeAttribute:@"knob-color" inState:CPThemeStateVertical|CPThemeStateHighlighted];
+	
+	}
 	
 }
 
