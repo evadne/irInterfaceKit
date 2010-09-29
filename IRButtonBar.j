@@ -47,6 +47,8 @@
 
 - (void) removeRightButtons {
 	
+	if (!rightButtons) return;
+	
 	var enumerator = [rightButtons objectEnumerator];
 	var object;
 	while (object = [enumerator nextObject]) {
@@ -56,7 +58,7 @@
 	
 	}
 	
-	[self layoutSubviews];
+	[self layout];
 	
 }
 
@@ -71,11 +73,13 @@
 	if ([aButton target] == nil) [aButton setTarget:self];
 	if ([aButton action] == nil) [aButton setAction:@selector(handleButtonClick:)];
 	
-	[self layoutSubviews];
+	[self layout];
 	
 }
 
 - (void) removeLeftButtons {
+	
+	if (!leftButtons) return;
 	
 	var enumerator = [leftButtons objectEnumerator];
 	var object;
@@ -86,7 +90,7 @@
 	
 	}
 	
-	[self layoutSubviews];
+	[self layout];
 	
 }
 
@@ -101,7 +105,7 @@
 	if ([aButton target] == nil) [aButton setTarget:self];
 	if ([aButton action] == nil) [aButton setAction:@selector(handleButtonClick:)];
 	
-	[self layoutSubviews];
+	[self layout];
 	
 }
 
@@ -109,13 +113,13 @@
 
 
 
-- (void) layoutSubviews {
+- (void) layout {
 	
-	// var subviews = [self subviews];
-	// var enumerator = [subviews objectEnumerator];
-	// var object;
-	// while (object = [enumerator nextObject])	
-	// [object centerVerticallyInSuperview];
+	var subviews = [self subviews];
+	var enumerator = [subviews objectEnumerator];
+	var object;
+	while (object = [enumerator nextObject])	
+	[object centerVerticallyInSuperview];
 		
 	var padding = 16;
 
