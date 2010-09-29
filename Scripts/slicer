@@ -48,3 +48,13 @@ slice IRSkinnyScroller.dark.backdrop.horizontal.png  0 8 0 8
 slice IRSkinnyScroller.dark.backdrop.horizontal.active.png  0 8 0 8
 slice IRSkinnyScroller.light.backdrop.horizontal.png 0 8 0 8
 slice IRSkinnyScroller.light.backdrop.horizontal.active.png 0 8 0 8
+
+slice IRDarkSunkenView.backdrop.png 20 20 20 20
+slice IREmperorBox.backdrop.png 0 32 0 32
+
+slice IRIndicatorBar.backdrop.png 16 32 16 32
+slice IRIndicatorBar.backdrop.active.png 16 32 16 32
+
+
+
+

@@ -17,13 +17,22 @@
 //	Styled Views
 		
 	@import "IRStyledView.j"
+	@import "IRDarkSunkenView.j"
 	@import "IRRecessedInnerShadowedView.j"
 	@import "IRBeigeBox.j"
 	@import "IRBubbleBox.j"
 	@import "IRYellowBox.j"
 	@import "IRCautionBox.j"
 	@import "IRRazorView.j"
+	@import "IRStripedBar.j"
+	@import "IREmperorBox.j"
 
+
+//	Bars
+	
+	@import "IRGenericBar.j"
+	@import "IRIndicatorBar.j"
+	@import "IRIndicatorBarElement.j"
 
 //	Text Fields
 
@@ -39,9 +48,11 @@
 
 //	Buttons and Button Bars
 	
-	@import "IRTactileContinueButton.j"	
+	@import "IRTactileButton.j"	
 	@import "IRHUDButton.j"
 	@import "IRHUDButtonBar.j"
+	@import "IRButtonBar.j"
+	@import "IRStripedBar.j"
 
 
 //	Windows
@@ -52,6 +63,7 @@
 //	Interactivity
 	
 	@import "IRMouseView.j"
+	@import "IRActionSheetController.j"
 	
 	
 	
