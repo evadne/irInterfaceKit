@@ -22,12 +22,12 @@
 	var topBackdropView = [[CPImageView alloc] initWithFrame:CGRectMake(0, -16, frame.size.width, 32)];
 	[self addSubview:topBackdropView];
 	[topBackdropView setImage:[CPImage imageNamed:@"IRRecessedInnerShadowedView.topBackdrop.png" inBundleOf:self]];
-	[topBackdropView setAutoresizingMask:CPViewWidthSizable];
+	[topBackdropView setAutoresizingMask:CPViewWidthSizable|CPViewMaxYMargin];
 
 	var bottomBackdropView = [[CPImageView alloc] initWithFrame:CGRectMake(0, frame.size.height - 16, frame.size.width, 32)];
 	[self addSubview:bottomBackdropView];
 	[bottomBackdropView setImage:[CPImage imageNamed:@"IRRecessedInnerShadowedView.bottomBackdrop.png" inBundleOf:self]];
-	[bottomBackdropView setAutoresizingMask:CPViewWidthSizable];
+	[bottomBackdropView setAutoresizingMask:CPViewWidthSizable|CPViewMinYMargin];
 
 	[self setClipsToBounds:NO];
 	
