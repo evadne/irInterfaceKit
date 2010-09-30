@@ -131,6 +131,8 @@
 		var leftOffset = 0;
 		
 		while (object = [enumerator nextObject]) {
+		
+			if ([object isHidden]) continue;
 			
 			[object setFrameOrigin:CGPointMake(leftOffset + padding, 0)];
 			[object centerVerticallyInSuperview];
@@ -150,6 +152,8 @@
 		var availableWidth = CGRectGetWidth([self frame]);
 		
 		while (object = [enumerator nextObject]) {
+			
+			if ([object isHidden]) continue;
 			
 			var objectWidth = CGRectGetWidth([object frame]);
 			
@@ -174,6 +178,12 @@
 	[[self delegate] buttonBar:self didReceiveActionFromButton:sender];
 	
 }
+
+
+
+
+
+//- (void) enqueueStepViewOfClass:(Class)inViewClass successHandler:(Function)inHandler
 
 
 
