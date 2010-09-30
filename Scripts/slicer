@@ -57,6 +57,8 @@ slice IRIndicatorBar.backdrop.active.png 16 32 16 32
 
 slice IRBubbleBox.backdrop.png 24 96 24 24
 
+slice IRBlueyStrip.backdrop.png 16 16 16 16
+
 
 
 
