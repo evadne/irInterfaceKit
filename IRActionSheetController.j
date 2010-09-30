@@ -135,10 +135,6 @@
 		footerViewHeight
 		
 	)];
-	
-//	[headerView setNeedsDisplay:YES];
-//	[contentView setNeedsDisplay:YES];
-//	[footerView setNeedsDisplay:YES];
 
 }
 
