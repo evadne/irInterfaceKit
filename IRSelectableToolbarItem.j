@@ -8,6 +8,7 @@
 @implementation IRSelectableToolbarItem : CPToolbarItem {
 	
 	BOOL selected;
+	CPView selectedBackdropView;
 	
 }
 
@@ -15,6 +16,8 @@
 	
 	self = [super initWithItemIdentifier:anItemIdentifier];
 	if (self === nil) return nil;
+	
+	selectedBackdropView = [[CPView alloc] init];
 
 //	CPImage imageNamed:@"" fromBundleResourcesOf:(id)sender {
 	
@@ -34,7 +37,7 @@
 - (void) setSelected:(BOOL)inSelectedFlag {
 	
 	selected = inSelectedFlag;
-	[selectedBackdropView setVisible:selected];
+	[selectedBackdropView setHidden:!selected];
 	
 }
 
