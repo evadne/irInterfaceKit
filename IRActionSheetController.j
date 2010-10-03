@@ -13,6 +13,8 @@
 	CPView wrapperView;
 	CPView backdropView;
 	
+	id representedObject @accessors;
+	
 }
 
 - (void) loadWindow {
