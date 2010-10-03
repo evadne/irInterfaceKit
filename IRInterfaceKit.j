@@ -3,6 +3,11 @@
 	
 //	Convenience Wrapper.
 	
+//	Dependencies
+	
+	@import <CPColor+IRAdditions/CPColor+IRAdditions.j>
+//	@import <CPFont+IRAdditions/CPFont+IRAdditions.j>
+	
 	
 	
 	
