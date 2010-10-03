@@ -10,7 +10,11 @@
 	kIRTactileSecondActionButtonStyle = @"IRTactileSecondActionButton";
 	kIRTactilePreviousButtonStyle = @"IRTactilePreviousButton";
 	kIRTactileDoneButtonStyle = @"IRTactileDoneButton";
-	
+
+
+
+
+
 @implementation IRTactileButton : CPButton {
 	
 	IRTactileButtonStyle style;
@@ -103,11 +107,28 @@
 	[button setValue:CGSizeMake(0.0, -1.0) forThemeAttribute:@"text-shadow-offset"];
 	
 	[button setValue:CGSizeMake(0.0, 32.0) forThemeAttribute:@"min-size"];
-	[button setValue:CGSizeMake(-1.0, 32.0) forThemeAttribute:@"max-size"];
+	[button setValue:CGSizeMake(-1.0, 64.0) forThemeAttribute:@"max-size"];
 	
 	[button setClipsToBounds:NO];
 	
 	return button;
+	
+}
+
+
+
+
+
+- (void) sizeToFit {
+	
+	[super sizeToFit];
+
+//	IE 9.0 does not work very well with CPPlatformString
+//	we need to hack it using a clean and unobstructive way
+//	TODO: Use Objective-J method swizzling, so the check is done only once at initialization
+	
+	if (navigator.userAgent.match(/IE\ 9.0/) != null)
+	[self setFrameSize:CGSizeMake([self frame].size.width + 4, [self frame].size.height)];
 	
 }
 
