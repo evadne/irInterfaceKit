@@ -18,6 +18,19 @@
 
 
 
+- (BOOL) acceptsFirstResponder {
+
+	return YES;
+
+}
+
+- (void) mouseDown:(CPEvent)anEvent {
+	
+	[_verticalScroller mouseDown:anEvent];
+	[_horizontalScroller mouseDown:anEvent];
+	
+}
+
 - (void) setInvertedColor:(BOOL)flag {
 	
 	[_verticalScroller setInvertedColor:flag];

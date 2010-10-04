@@ -58,7 +58,7 @@
 	
 	}
 	
-	[self layout];
+	[self setNeedsLayout];
 	
 }
 
@@ -73,7 +73,7 @@
 	if ([aButton target] == nil) [aButton setTarget:self];
 	if ([aButton action] == nil) [aButton setAction:@selector(handleButtonClick:)];
 	
-	[self layout];
+	[self setNeedsLayout];
 	
 }
 
@@ -90,7 +90,7 @@
 	
 	}
 	
-	[self layout];
+	[self setNeedsLayout];
 	
 }
 
@@ -105,7 +105,7 @@
 	if ([aButton target] == nil) [aButton setTarget:self];
 	if ([aButton action] == nil) [aButton setAction:@selector(handleButtonClick:)];
 	
-	[self layout];
+	[self setNeedsLayout];
 	
 }
 
@@ -113,12 +113,18 @@
 
 
 
-- (void) layout {
+- (void) layoutSubviews {
+	
+	CPLog(@"LAYOUT!");
 	
 	var subviews = [self subviews];
+	
+	CPLog(@"subviews: %@", subviews);
+	
 	var enumerator = [subviews objectEnumerator];
 	var object;
-	while (object = [enumerator nextObject])	
+	while (object = [enumerator nextObject])
+	if ([object isKindOfClass:[IRTactileButton class]])
 	[object centerVerticallyInSuperview];
 		
 	var padding = 16;
@@ -131,8 +137,18 @@
 		var leftOffset = 0;
 		
 		while (object = [enumerator nextObject]) {
+			
+			if (![object isKindOfClass:[IRTactileButton class]]) continue;
+
+			CPLog(@"object class is %@", [object class]);
+			
+			[object setAlphaValue:0.2];
+			
+			CPLog(@"object is %@, hidden? %@", object, [object isHidden]);
 		
 			if ([object isHidden]) continue;
+			
+			[object setAlphaValue:1];		
 			
 			[object setFrameOrigin:CGPointMake(leftOffset + padding, 0)];
 			[object centerVerticallyInSuperview];
@@ -153,7 +169,17 @@
 		
 		while (object = [enumerator nextObject]) {
 			
+			if (![object isKindOfClass:[IRTactileButton class]]) continue;
+			
+			CPLog(@"object class is %@", [object class]);
+			
+			[object setAlphaValue:0.2];
+			
+			CPLog(@"object is %@, hidden? %@", object, [object isHidden]);
+				
 			if ([object isHidden]) continue;
+			
+			[object setAlphaValue:1];
 			
 			var objectWidth = CGRectGetWidth([object frame]);
 			

@@ -3,15 +3,29 @@
 	
 	
 	
-	
+
+@implementation CPResponder (Test)
+
+- (void)mouseDown:(CPEvent)anEvent
+{
+
+CPLog(@"mouseDown called on %@.  Not handled.  Forwarding to %@.", self, [self nextResponder]);
+    [_nextResponder performSelector:_cmd withObject:anEvent];
+}
+
+@end
 @implementation IRActionSheetController : CPWindowController {
 	
-	CPView headerView;
-	CPView contentView;
-	CPView footerView;
-	
+//	The backdropView provides the boxy backdrop
+	CPView backdropView;	
+
 	CPView wrapperView;
-	CPView backdropView;
+	
+	CPView headerView;
+	CPView footerView;
+
+	CPScrollView contentWrapperView;
+	CPView contentView;
 	
 	id representedObject @accessors;
 	
@@ -21,22 +35,38 @@
 	
 	if (_window) return;
 	
-	_window = [[CPWindow alloc] initWithContentRect:CGRectMake(0, 0, 512, 512) styleMask:CPDocModalWindowMask];	
-	[_window._windowView setClipsToBounds:NO];
+	[self setWindow:[[CPWindow alloc] initWithContentRect:CGRectMake(0, 0, 512, 512) styleMask:CPDocModalWindowMask]];
+	[[self window] setContentView:[[IRActionSheetLayoutView alloc] initWithFrame:CGRectMakeZero()]];
+	[[self window] setHasShadow:NO];
+	[[self window]._windowView setClipsToBounds:NO];
 	
-	[_window._windowView setBackgroundColor:[CPColor redColor]];
-
+	
 	backdropView = [[IRBeigeBox alloc] initWithFrame:CGRectMake(0, -32, 512, 512 + 32)];
-	[[_window contentView] addSubview:backdropView];
-	[backdropView setAutoresizingMask:CPViewWidthSizable|CPViewHeightSizable];
-	[[_window contentView] setClipsToBounds:NO];
-	[[_window contentView] setAutoresizesSubviews:YES];
+	[[[self window] contentView] addSubview:backdropView];
 	
-	wrapperView = [[CPView alloc] initWithFrame:CGRectMake(0, 0, 512, 512)];
-	[wrapperView setAutoresizingMask:CPViewWidthSizable|CPViewHeightSizable];
-	[[_window contentView] addSubview:wrapperView];
+		[backdropView setAutoresizingMask:CPViewWidthSizable|CPViewHeightSizable];
+		[[_window contentView] setClipsToBounds:NO];
+		[[_window contentView] setAutoresizesSubviews:YES];
+	
+	
+//	Wrapper
+	
+	// contentWrapperBaseView = [[IRRecessedInnerShadowedView alloc] initWithFrame:CGRectMake(0, 0, 512, 512)];
+	// [contentWrapperBaseView setAutoresizingMask:CPViewWidthSizable|CPViewHeightSizable];
+	// [[[self window] contentView] setContentView:contentWrapperBaseView];
+	
+//	contentWrapperView = [[IRSkinnyScrollView alloc] initWithFrame:CGRectMake(0, 0, 512, 512)];
+//	[contentWrapperBaseView addSubview:contentWrapperView positioned:CPWindowBelow relativeTo:nil];
+	
+	contentWrapperView = [[IRSkinnyScrollView alloc] initWithFrame:CGRectMake(0, 0, 512, 512)];
+	[contentWrapperView setAutoresizingMask:CPViewWidthSizable|CPViewHeightSizable];
+	[[[self window] contentView] setContentView:contentWrapperView];
+	[contentWrapperView setAutoresizingMask:CPViewWidthSizable|CPViewHeightSizable];
 
-	[_window setHasShadow:NO];
+		[contentWrapperView setHasHorizontalScroller:YES];
+		[contentWrapperView setHasVerticalScroller:YES];
+		[contentWrapperView setAutohidesScrollers:NO];
+		[contentWrapperView setInvertedColor:NO];
 
 }
 
@@ -45,15 +75,12 @@
 
 
 - (void) setHeaderView:(CPView)inHeaderView {
+
+	[inHeaderView setAutoresizingMask:CPViewWidthSizable|CPViewMaxYMargin];
+	[[[self window] contentView] setHeaderView:inHeaderView];
 	
-	if (inHeaderView == nil) return;
-	if (inHeaderView == headerView) return;
-	[headerView removeFromSuperview];
 	headerView = inHeaderView;
-	
-	[wrapperView addSubview:headerView];
-	[self layout];
-	
+
 }
 
 - (CPView) headerView {
@@ -64,17 +91,14 @@
 
 - (void) setFooterView:(CPView)inFooterView {
 	
-	if (inFooterView == nil) return;
-	if (inFooterView == footerView) return;
-	[footerView removeFromSuperview];
-	footerView = inFooterView;
+	[inFooterView setAutoresizingMask:CPViewWidthSizable|CPViewMinYMargin];
+	[[[self window] contentView] setFooterView:inFooterView];
 	
-	[wrapperView addSubview:footerView];
-	[self layout];
+	footerView = inFooterView;
 	
 }
 
-- (void) footerView {
+- (CPView) footerView {
 	
 	return footerView;
 	
@@ -82,21 +106,14 @@
 
 - (void) setContentView:(CPView)inContentView {
 	
-	if (inContentView == nil) return;
-	if (inContentView == contentView) return;
-	[contentView removeFromSuperview];
+	[contentWrapperView setDocumentView:inContentView];
 	contentView = inContentView;
-	[contentView setAutoresizingMask:CPViewWidthSizable|CPViewHeightSizable];
-	[contentView setFrame:CGRectMake(0, 0, CGRectGetWidth([wrapperView frame]), CGRectGetHeight([wrapperView frame]))];
-
-	[wrapperView addSubview:contentView];
-	[self layout];
 	
 }
 
-- (void) contentView {
+- (CPView) contentView {
 	
-	return contentView;
+	return [contentWrapperView documentView];
 	
 }
 
@@ -104,45 +121,67 @@
 
 
 
-- (void) layout {
-	
-	var fullFrameWidth = CGRectGetWidth([wrapperView frame]);
-	var fullFrameHeight = CGRectGetHeight([wrapperView frame]);
-	
-	//	Lay out the content view
-	
-	var headerViewHeight = (headerView == nil) ? 0 : CGRectGetHeight([headerView frame]);
-	var footerViewHeight = (footerView == nil) ? 0 : CGRectGetHeight([footerView frame]);
+@end
 
-	[headerView setFrame:CGRectMake(
-		
-		0, 0, 
-		fullFrameWidth, 
-		headerViewHeight
-		
-	)];
+@implementation IRActionSheetLayoutView : CPView  {
 	
-	[contentView setFrame:CGRectMake(
-		
-		0, headerViewHeight, 
-		fullFrameWidth, 
-		fullFrameHeight - headerViewHeight - footerViewHeight
-		
-	)];
+	CPView headerView @accessors;
+	CPView contentView @accessors;
+	CPView footerView @accessors;
 	
-	[footerView setFrame:CGRectMake(
-		
-		0, fullFrameHeight - footerViewHeight, 
-		fullFrameWidth, 
-		footerViewHeight
-		
-	)];
+}
 
+- (void) setHeaderView:(CPView)inView {
+	
+	if (!inView || inView == headerView) return;
+	if (headerView) [headerView removeFromSuperview];
+
+	headerView = inView;
+	[self addSubview:headerView positioned:CPWindowAbove relativeTo:contentView];
+	
+}
+
+- (void) setContentView:(CPView)inView {
+	
+	if (!inView || inView == contentView) return;
+	if (contentView) [contentView removeFromSuperview];
+
+	contentView = inView;
+	[self addSubview:contentView];
+	
+}
+
+- (void) setFooterView:(CPView)inView {
+	
+	CPLog(@"setFooterView: %@", inView);
+	
+	if (!inView || inView == footerView) return;
+	if (footerView) [footerView removeFromSuperview];
+
+	footerView = inView;
+	[self addSubview:footerView positioned:CPWindowAbove relativeTo:contentView];
+	
+	CPLog(@"done, footerView is now %@", footerView);
+	
 }
 
 
-
-
+- (void) layoutSubviews {
+	
+	if (!contentView) return;
+	
+	var	totalWidth = CGRectGetWidth([self frame]),
+		totalHeight = CGRectGetHeight([self frame]), 
+		headerViewHeight = headerView ? CGRectGetHeight([headerView frame]) : 0,
+		footerViewHeight = footerView ? CGRectGetHeight([footerView frame]) : 0;
+	
+	if (headerView) [headerView setFrame:CGRectMake(0, 0, totalWidth, headerViewHeight)];
+	
+	[contentView setFrame:CGRectMake(0, headerViewHeight, totalWidth, totalHeight - headerViewHeight - footerViewHeight)];
+	
+	if (footerView) [footerView setFrame:CGRectMake(0, totalHeight - footerViewHeight, totalWidth, footerViewHeight)];
+	
+}
 
 @end
 
