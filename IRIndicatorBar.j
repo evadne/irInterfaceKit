@@ -51,8 +51,6 @@
 	
 	var enumerator = [inSteps objectEnumerator]; var object; while (object = [enumerator nextObject]){
 		
-		CPLog(@"making object for %@", object);
-		
 		unLaidSubview = [[IRIndicatorBarElement alloc] initWithFrame:CGRectMake(0, 0, 128, 32) title:object];
 		[contentView addSubview:unLaidSubview];
 		

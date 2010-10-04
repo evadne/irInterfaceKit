@@ -44,8 +44,6 @@
 
 - (void) setActive:(BOOL)flag {
 	
-	CPLog(@"label is %@", label);
-	
 	if (flag) {
 		
 		[backgroundView setBackgroundNinePartPatternImageNamed:@"IRIndicatorBar.backdrop.active" sliceTop:16 right:32 bottom:16 left:32 sender:self];
