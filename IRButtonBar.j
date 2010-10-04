@@ -1,4 +1,5 @@
 //	IRButtonBar
+//	Evadne Wu at Iridia, 2010
 	
 	
 	
@@ -49,8 +50,7 @@
 	
 	if (!rightButtons) return;
 	
-	var enumerator = [rightButtons objectEnumerator];
-	var object;
+	var enumerator = [rightButtons objectEnumerator], object = nil;
 	while (object = [enumerator nextObject]) {
 
 		[rightButtons removeObject:object];
@@ -70,9 +70,6 @@
 	[rightButtons addObject:aButton];
 	[self addSubview:aButton];
 	
-	if ([aButton target] == nil) [aButton setTarget:self];
-	if ([aButton action] == nil) [aButton setAction:@selector(handleButtonClick:)];
-	
 	[self setNeedsLayout];
 	
 }
@@ -81,8 +78,7 @@
 	
 	if (!leftButtons) return;
 	
-	var enumerator = [leftButtons objectEnumerator];
-	var object;
+	var enumerator = [leftButtons objectEnumerator], object = nil;
 	while (object = [enumerator nextObject]) {
 
 		[leftButtons removeObject:object];
@@ -101,10 +97,6 @@
 	
 	[leftButtons addObject:aButton];
 	[self addSubview:aButton];
-	
-	if ([aButton target] == nil) [aButton setTarget:self];
-	if ([aButton action] == nil) [aButton setAction:@selector(handleButtonClick:)];
-	
 	[self setNeedsLayout];
 	
 }
@@ -115,42 +107,27 @@
 
 - (void) layoutSubviews {
 	
-	CPLog(@"LAYOUT!");
-	
 	var subviews = [self subviews];
+	var enumerator = [subviews objectEnumerator], object = nil;
 	
-	CPLog(@"subviews: %@", subviews);
-	
-	var enumerator = [subviews objectEnumerator];
-	var object;
 	while (object = [enumerator nextObject])
 	if ([object isKindOfClass:[IRTactileButton class]])
 	[object centerVerticallyInSuperview];
-		
+	
+	
 	var padding = 16;
 
 	if ([leftButtons count] != 0) {
 		
-		var enumerator = [leftButtons objectEnumerator];
-		var object;
-		
-		var leftOffset = 0;
+		var enumerator = [leftButtons objectEnumerator], object = nil, leftOffset = 0;
 		
 		while (object = [enumerator nextObject]) {
 			
-			if (![object isKindOfClass:[IRTactileButton class]]) continue;
-
-			CPLog(@"object class is %@", [object class]);
-			
-			[object setAlphaValue:0.2];
-			
-			CPLog(@"object is %@, hidden? %@", object, [object isHidden]);
-		
-			if ([object isHidden]) continue;
-			
-			[object setAlphaValue:1];		
+			if (![object isKindOfClass:[IRTactileButton class]] || [object isHidden]) 
+			continue;
 			
 			[object setFrameOrigin:CGPointMake(leftOffset + padding, 0)];
+			
 			[object centerVerticallyInSuperview];
 			
 			leftOffset += CGRectGetWidth([object frame]) + padding;
@@ -161,29 +138,23 @@
 	
 	if ([rightButtons count] != 0) {
 		
-		var enumerator = [rightButtons objectEnumerator];
-		var object;
-		
-		var rightOffset = 0;
-		var availableWidth = CGRectGetWidth([self frame]);
+		var	enumerator = [rightButtons objectEnumerator], object = nil, rightOffset = 0,
+			availableWidth = CGRectGetWidth([self frame]);
 		
 		while (object = [enumerator nextObject]) {
 			
-			if (![object isKindOfClass:[IRTactileButton class]]) continue;
-			
-			CPLog(@"object class is %@", [object class]);
-			
-			[object setAlphaValue:0.2];
-			
-			CPLog(@"object is %@, hidden? %@", object, [object isHidden]);
-				
-			if ([object isHidden]) continue;
-			
-			[object setAlphaValue:1];
-			
+			if (![object isKindOfClass:[IRTactileButton class]] || [object isHidden])
+			continue;
+
 			var objectWidth = CGRectGetWidth([object frame]);
 			
-			[object setFrameOrigin:CGPointMake(availableWidth - rightOffset - objectWidth - padding, 0)];
+			[object setFrameOrigin:CGPointMake(
+				
+				availableWidth - rightOffset - objectWidth - padding, 
+				0
+				
+			)];
+			
 			[object centerVerticallyInSuperview];
 			
 			rightOffset += objectWidth + padding;
@@ -204,12 +175,6 @@
 	[[self delegate] buttonBar:self didReceiveActionFromButton:sender];
 	
 }
-
-
-
-
-
-//- (void) enqueueStepViewOfClass:(Class)inViewClass successHandler:(Function)inHandler
 
 
 
