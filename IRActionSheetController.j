@@ -1,19 +1,10 @@
 //	IRActionSheetController.j
+//	Evadne Wu at Iridia, 2010
 	
 	
 	
 	
 
-@implementation CPResponder (Test)
-
-- (void)mouseDown:(CPEvent)anEvent
-{
-
-CPLog(@"mouseDown called on %@.  Not handled.  Forwarding to %@.", self, [self nextResponder]);
-    [_nextResponder performSelector:_cmd withObject:anEvent];
-}
-
-@end
 @implementation IRActionSheetController : CPWindowController {
 	
 //	The backdropView provides the boxy backdrop
@@ -35,7 +26,7 @@ CPLog(@"mouseDown called on %@.  Not handled.  Forwarding to %@.", self, [self n
 	
 	if (_window) return;
 	
-	[self setWindow:[[CPWindow alloc] initWithContentRect:CGRectMake(0, 0, 512, 512) styleMask:CPDocModalWindowMask]];
+	[self setWindow:[[IRActionSheetAnchoredWindow alloc] initWithContentRect:CGRectMake(0, 0, 512, 512) styleMask:CPDocModalWindowMask]];
 	[[self window] setContentView:[[IRActionSheetLayoutView alloc] initWithFrame:CGRectMakeZero()]];
 	[[self window] setHasShadow:NO];
 	[[self window]._windowView setClipsToBounds:NO];
@@ -49,15 +40,6 @@ CPLog(@"mouseDown called on %@.  Not handled.  Forwarding to %@.", self, [self n
 		[[_window contentView] setAutoresizesSubviews:YES];
 	
 	
-//	Wrapper
-	
-	// contentWrapperBaseView = [[IRRecessedInnerShadowedView alloc] initWithFrame:CGRectMake(0, 0, 512, 512)];
-	// [contentWrapperBaseView setAutoresizingMask:CPViewWidthSizable|CPViewHeightSizable];
-	// [[[self window] contentView] setContentView:contentWrapperBaseView];
-	
-//	contentWrapperView = [[IRSkinnyScrollView alloc] initWithFrame:CGRectMake(0, 0, 512, 512)];
-//	[contentWrapperBaseView addSubview:contentWrapperView positioned:CPWindowBelow relativeTo:nil];
-	
 	contentWrapperView = [[IRSkinnyScrollView alloc] initWithFrame:CGRectMake(0, 0, 512, 512)];
 	[contentWrapperView setAutoresizingMask:CPViewWidthSizable|CPViewHeightSizable];
 	[[[self window] contentView] setContentView:contentWrapperView];
@@ -69,9 +51,6 @@ CPLog(@"mouseDown called on %@.  Not handled.  Forwarding to %@.", self, [self n
 		[contentWrapperView setInvertedColor:NO];
 
 }
-
-
-
 
 
 - (void) setHeaderView:(CPView)inHeaderView {
@@ -118,10 +97,58 @@ CPLog(@"mouseDown called on %@.  Not handled.  Forwarding to %@.", self, [self n
 }
 
 
+- (void) resizeSheetToFitDocumentView {
+	
+	if (!contentView) return;
+
+//	Width: the document view, or window width - 128px, the smaller, but larger than the minimum width, 384px
+	
+	var MINIMAL_SHEET_WIDTH = 384;
+	var MINIMAL_SHEET_HEIGHT = 0;
+
+	var documentWrapperViewFrame = [contentWrapperView frame];		
+	var documentViewFrame = [contentView frame];
+	if (!documentViewFrame) documentViewFrame = CGRectMake(0, 0, 384, 384);
 
 
+//	The maximum allowed frame is a visually spacious maximum for really large document views
+		
+	var windowFrame = [[self window] frame];
+	var platformWindowFrame = [[[self window] platformWindow] visibleFrame];
+
+	maximumAllowedWidth = platformWindowFrame.size.width - 128;
+	maximumAllowedHeight = platformWindowFrame.size.height - 64;
+
+	
+//	Suggest a frame that simply fits everything.  Notice the frame is not centered.
+	
+	var suggestedWidth = documentViewFrame.size.width;
+	var suggestedHeight = windowFrame.size.height + (documentViewFrame.size.height - documentWrapperViewFrame.size.height);
+	
+	var finalWidth = MIN(suggestedWidth, maximumAllowedWidth);
+	var finalHeight = MIN(suggestedHeight, maximumAllowedHeight);
+		
+	var finalFrame = CGAlignedRectMake(
+	
+		CGRectMake(0, 0, finalWidth, finalHeight), kCGAlignmentPointRefTop,
+		platformWindowFrame, kCGAlignmentPointRefTop
+		
+	);
+	
+	[[self window] setFrame:finalFrame display:YES animate:YES];
+	
+}
 
 @end
+
+
+
+
+
+
+
+
+
 
 @implementation IRActionSheetLayoutView : CPView  {
 	
@@ -153,15 +180,11 @@ CPLog(@"mouseDown called on %@.  Not handled.  Forwarding to %@.", self, [self n
 
 - (void) setFooterView:(CPView)inView {
 	
-	CPLog(@"setFooterView: %@", inView);
-	
 	if (!inView || inView == footerView) return;
 	if (footerView) [footerView removeFromSuperview];
 
 	footerView = inView;
 	[self addSubview:footerView positioned:CPWindowAbove relativeTo:contentView];
-	
-	CPLog(@"done, footerView is now %@", footerView);
 	
 }
 
@@ -175,11 +198,68 @@ CPLog(@"mouseDown called on %@.  Not handled.  Forwarding to %@.", self, [self n
 		headerViewHeight = headerView ? CGRectGetHeight([headerView frame]) : 0,
 		footerViewHeight = footerView ? CGRectGetHeight([footerView frame]) : 0;
 	
-	if (headerView) [headerView setFrame:CGRectMake(0, 0, totalWidth, headerViewHeight)];
+	if (headerView) [headerView setFrame:CGRectMake(
+		
+		0, 
+		0, 
+		totalWidth, 
+		headerViewHeight
+		
+	)];
 	
-	[contentView setFrame:CGRectMake(0, headerViewHeight, totalWidth, totalHeight - headerViewHeight - footerViewHeight)];
+	[contentView setFrame:CGRectMake(
+		
+		0, 
+		headerViewHeight, 
+		totalWidth, 
+		totalHeight - headerViewHeight - footerViewHeight
+		
+	)];
 	
-	if (footerView) [footerView setFrame:CGRectMake(0, totalHeight - footerViewHeight, totalWidth, footerViewHeight)];
+	if (footerView) [footerView setFrame:CGRectMake(
+		
+		0, 
+		totalHeight - footerViewHeight, 
+		totalWidth, 
+		footerViewHeight
+		
+	)];
+	
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
+@implementation IRActionSheetAnchoredWindow : CPWindow 
+
+- (CPWindow) parentWindow {
+	
+	return self._parentView;
+	
+}
+
+- (void) becomeKeyWindow {
+	
+	[super becomeKeyWindow];
+	
+	if (self._isSheet)
+	[[CPNotificationCenter defaultCenter] addObserver:self selector:@selector(parentWindowDidResize:) name:CPWindowDidResizeNotification object:[self parentWindow]];
+	
+}
+
+- (void) parentWindowDidResize:(CPNotification)inNotification {
+
+//	TODO: Perhaps handle additional resizing work here
+
+	[self setFrameOrigin:CGPointMake((CGRectGetWidth([[self parentWindow] frame]) - CGRectGetWidth([self frame])) / 2,  0)];
 	
 }
 
