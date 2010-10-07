@@ -20,6 +20,9 @@
 	
 	id representedObject @accessors;
 	
+	CGSize contentSize;
+	BOOL contentWantsFullLayout @accessors;
+	
 }
 
 - (void) loadWindow {
@@ -49,6 +52,8 @@
 		[contentWrapperView setHasVerticalScroller:YES];
 		[contentWrapperView setAutohidesScrollers:NO];
 		[contentWrapperView setInvertedColor:NO];
+		
+	contentWantsFullLayout = NO;
 
 }
 
@@ -88,6 +93,18 @@
 	[contentWrapperView setDocumentView:inContentView];
 	contentView = inContentView;
 	
+	contentSize = CGSizeMake(CGRectGetWidth([contentView frame]), CGRectGetHeight([contentView frame]));
+	
+	if (!contentWantsFullLayout) return;
+	
+	[contentView setFrame:CGRectMake(
+	
+		0, 0,
+		CGRectGetWidth([contentWrapperView frame]),
+		CGRectGetHeight([contentWrapperView frame])
+		
+	)];
+	
 }
 
 - (CPView) contentView {
@@ -97,7 +114,16 @@
 }
 
 
+
+
+
 - (void) resizeSheetToFitDocumentView {
+	
+	[self resizeSheetToFitDocumentViewAnimated:YES];
+	
+}
+
+- (void) resizeSheetToFitDocumentViewAnimated:(BOOL)shouldAnimate {
 	
 	if (!contentView) return;
 
@@ -125,6 +151,23 @@
 	var suggestedWidth = documentViewFrame.size.width;
 	var suggestedHeight = windowFrame.size.height + (documentViewFrame.size.height - documentWrapperViewFrame.size.height);
 	
+	if (contentWantsFullLayout) {
+		
+		suggestedWidth = maximumAllowedWidth;
+		suggestedHeight = maximumAllowedHeight;
+		
+		[contentView setFrame:CGRectMake(0, 0, 
+			
+			suggestedWidth, 
+			suggestedHeight - (windowFrame.size.height - documentViewFrame.size.height)
+			
+		)];
+		
+	//	Note that we do NOT set the autoresizing mask on the content view when it is set.
+	//	We let the scroll view do its magic
+		
+	}
+	
 	var finalWidth = MIN(suggestedWidth, maximumAllowedWidth);
 	var finalHeight = MIN(suggestedHeight, maximumAllowedHeight);
 		
@@ -134,8 +177,8 @@
 		platformWindowFrame, kCGAlignmentPointRefTop
 		
 	);
-	
-	[[self window] setFrame:finalFrame display:YES animate:YES];
+		
+	[[self window] setFrame:finalFrame display:YES animate:shouldAnimate];
 	
 }
 
@@ -256,10 +299,14 @@
 }
 
 - (void) parentWindowDidResize:(CPNotification)inNotification {
-
+	
+	if (![self parentWindow]) return;
+	
 //	TODO: Perhaps handle additional resizing work here
 
 	[self setFrameOrigin:CGPointMake((CGRectGetWidth([[self parentWindow] frame]) - CGRectGetWidth([self frame])) / 2,  0)];
+	
+	[_windowController resizeSheetToFitDocumentViewAnimated:NO];
 	
 }
 
