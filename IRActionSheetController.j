@@ -54,8 +54,83 @@
 		[contentWrapperView setInvertedColor:NO];
 		
 	contentWantsFullLayout = NO;
+	
+	[[CPNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWindowWillBeginSheetNotification:) name:CPWindowWillBeginSheetNotification object:nil];
+	
+	[[CPNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWindowDidEndSheetNotification:) name:CPWindowDidEndSheetNotification object:nil];
 
 }
+
+
+
+
+
+- (void) handleWindowWillBeginSheetNotification:(CPNotification)inNotification {
+	
+	var sheetHostingWindow = [inNotification object];
+	
+	if (!sheetHostingWindow._irShadeWindow) {
+	
+		sheetHostingWindow._irShadeWindow = [[CPWindow alloc] initWithContentRect:CGRectMakeZero() styleMask:CPBorderlessBridgeWindowMask];
+
+		[[sheetHostingWindow._irShadeWindow contentView] setBackgroundColor:[CPColor blackColor]];
+	
+	}
+	
+	[sheetHostingWindow._irShadeWindow orderFront:self];
+	[[sheetHostingWindow._irShadeWindow contentView] setAlphaValue:0.0];
+		
+	var backgroundAnimation = [[LPViewAnimation alloc] initWithViewAnimations:[{
+
+		@"target": [sheetHostingWindow._irShadeWindow contentView],
+		@"animations": [
+		
+			[LPFadeAnimationKey, 0.0, 0.75]
+
+		]
+
+	}]];
+	
+	[backgroundAnimation setAnimationCurve:CPAnimationEaseInOut];
+	[backgroundAnimation setDuration:.125];
+	[backgroundAnimation setShouldUseCSSAnimations:YES];
+
+	[backgroundAnimation startAnimation];
+
+}
+
+
+
+
+
+- (void) handleWindowDidEndSheetNotification:(CPNotification)inNotification {
+	
+	var sheetHostingWindow = [inNotification object];
+	
+	if (!sheetHostingWindow._irShadeWindow) return;
+	
+	var backgroundAnimation = [[LPViewAnimation alloc] initWithViewAnimations:[{
+
+		@"target": [sheetHostingWindow._irShadeWindow contentView],
+		@"animations": [
+		
+			[LPFadeAnimationKey, 0.75, 0.0]
+
+		]
+
+	}]];
+	
+	[backgroundAnimation setAnimationCurve:CPAnimationEaseInOut];
+	[backgroundAnimation setDuration:.25];
+	[backgroundAnimation setShouldUseCSSAnimations:YES];
+	[backgroundAnimation startAnimation];
+	
+	[sheetHostingWindow._irShadeWindow performSelector:@selector(orderOut:) withObject:self afterDelay:.26];
+	
+}
+
+
+
 
 
 - (void) setHeaderView:(CPView)inHeaderView {
@@ -120,6 +195,7 @@
 - (void) resizeSheetToFitDocumentView {
 	
 	[self resizeSheetToFitDocumentViewAnimated:YES];
+	[[CPRunLoop currentRunLoop] limitDateForMode:CPDefaultRunLoopMode];
 	
 }
 
