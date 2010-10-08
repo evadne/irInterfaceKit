@@ -50,6 +50,11 @@
 	@import "IRSkinnyScroller.j"
 
 
+//	Sliders
+	
+	@import "IRLightSlider.j"
+
+
 //	Buttons and Button Bars
 	
 	@import "IRTactileButton.j"	

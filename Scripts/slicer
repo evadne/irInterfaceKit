@@ -59,6 +59,9 @@ slice IRBubbleBox.backdrop.png 24 96 24 24
 
 slice IRBlueyStrip.backdrop.png 16 16 16 16
 
+slice IRLightSlider.track.vertical.png 8 0 8 0
+slice IRLightSlider.track.vertical.disabled.png 8 0 8 0
+
 
 
 
