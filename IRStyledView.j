@@ -25,7 +25,8 @@
 	var fullFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
 
 	backgroundView = [[CPView alloc] initWithFrame:fullFrame];
-	[self addSubview:backgroundView];	
+	[self addSubview:backgroundView];
+	[backgroundView setHitTests:NO];
 
 	contentView = [[CPView alloc] initWithFrame:fullFrame];	
 	[self addSubview:contentView];
