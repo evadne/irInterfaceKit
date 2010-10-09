@@ -193,7 +193,8 @@
 
 
 - (void) resizeSheetToFitDocumentView {
-	
+
+	[[CPRunLoop currentRunLoop] limitDateForMode:CPDefaultRunLoopMode];	
 	[self resizeSheetToFitDocumentViewAnimated:YES];
 	[[CPRunLoop currentRunLoop] limitDateForMode:CPDefaultRunLoopMode];
 	
@@ -253,6 +254,8 @@
 		platformWindowFrame, kCGAlignmentPointRefTop
 		
 	);
+	
+	[[CPRunLoop currentRunLoop] limitDateForMode:CPDefaultRunLoopMode];	
 		
 	[[self window] setFrame:finalFrame display:YES animate:shouldAnimate];
 	
@@ -343,6 +346,8 @@
 		footerViewHeight
 		
 	)];
+	
+	[[CPRunLoop currentRunLoop] limitDateForMode:CPDefaultRunLoopMode];
 	
 }
 
