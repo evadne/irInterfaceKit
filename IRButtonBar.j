@@ -5,7 +5,7 @@
 	
 	
 	
-@implementation IRButtonBar : CPView {
+@implementation IRButtonBar : IRStyledView {
 	
 	CPMutableArray rightButtons;
 	CPMutableArray leftButtons;
@@ -13,6 +13,26 @@
 	BOOL patterned;
 	
 	id delegate @accessors;
+	
+	float buttonPadding @accessors;
+	float headPadding @accessors;
+	float tailPadding @accessors;
+	
+}
+
+
+
+
+
+- (void) initWithFrame:(CGRect)inFrame {
+	
+	self = [super initWithFrame:inFrame]; if (self == nil) return;
+	
+	buttonPadding = 16;
+	headPadding = 16;
+	tailPadding = 16;
+	
+	return self;
 	
 }
 
@@ -36,15 +56,15 @@
 	
 }
 
-
-
-
-
 - (BOOL) patterned {
 	
 	return patterned;
 	
 }
+
+
+
+
 
 - (void) removeRightButtons {
 	
@@ -74,6 +94,10 @@
 	
 }
 
+
+
+
+
 - (void) removeLeftButtons {
 	
 	if (!leftButtons) return;
@@ -91,7 +115,7 @@
 }
 
 - (void) addLeftButton:(CPView)aButton {
-	
+		
 	if (!leftButtons)
 	leftButtons = [CPMutableArray array];
 	
@@ -111,26 +135,27 @@
 	var enumerator = [subviews objectEnumerator], object = nil;
 	
 	while (object = [enumerator nextObject])
-	if ([object isKindOfClass:[IRTactileButton class]])
+	if ([leftButtons containsObject:object] || [rightButtons containsObject:object])
 	[object centerVerticallyInSuperview];
 	
-	
-	var padding = 16;
-
 	if ([leftButtons count] != 0) {
 		
 		var enumerator = [leftButtons objectEnumerator], object = nil, leftOffset = 0;
 		
+		var leftPadding = headPadding;
+		
 		while (object = [enumerator nextObject]) {
 			
-			if (![object isKindOfClass:[IRTactileButton class]] || [object isHidden]) 
+			if ([object isHidden]) 
 			continue;
 			
-			[object setFrameOrigin:CGPointMake(leftOffset + padding, 0)];
+			[object setFrameOrigin:CGPointMake(leftOffset + leftPadding, 0)];
 			
 			[object centerVerticallyInSuperview];
 			
-			leftOffset += CGRectGetWidth([object frame]) + padding;
+			leftOffset += CGRectGetWidth([object frame]) + leftPadding;
+			
+			leftPadding = buttonPadding;
 
 		}
 		
@@ -141,27 +166,67 @@
 		var	enumerator = [rightButtons objectEnumerator], object = nil, rightOffset = 0,
 			availableWidth = CGRectGetWidth([self frame]);
 		
+		var rightPadding = tailPadding;
+		
 		while (object = [enumerator nextObject]) {
 			
-			if (![object isKindOfClass:[IRTactileButton class]] || [object isHidden])
+			if ([object isHidden])
 			continue;
 
 			var objectWidth = CGRectGetWidth([object frame]);
 			
 			[object setFrameOrigin:CGPointMake(
 				
-				availableWidth - rightOffset - objectWidth - padding, 
+				availableWidth - rightOffset - objectWidth - rightPadding, 
 				0
 				
 			)];
 			
 			[object centerVerticallyInSuperview];
 			
-			rightOffset += objectWidth + padding;
+			rightOffset += objectWidth + rightPadding;
+			
+			rightPadding = buttonPadding;
 
 		}
 		
 	}
+	
+}
+
+
+
+
+
+- (void) sizeToFit {
+	
+	var	leftButtonsEnumerator = [leftButtons objectEnumerator],
+		rightButtonsEnumerator = [rightButtons objectEnumerator],
+		object = nil,
+		totalWidth = 0;
+	
+	if (leftButtons) {	
+		
+		while (object = [leftButtonsEnumerator nextObject])
+		totalWidth += CGRectGetWidth([object frame]);
+		
+		totalWidth += buttonPadding * ([leftButtons count] - 1);
+		
+	}
+	
+	if (rightButtons) {
+		
+		while (object = [rightButtonsEnumerator nextObject])
+		totalWidth += CGRectGetWidth([object frame]);
+		
+		totalWidth += buttonPadding * ([rightButtons count] - 1);
+	
+	}
+	
+	totalWidth += headPadding;
+	totalWidth += tailPadding;
+	
+	[self setFrameSize:CGSizeMake(totalWidth, CGRectGetHeight([self frame]))];
 	
 }
 
