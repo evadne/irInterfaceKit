@@ -57,10 +57,14 @@ slice IRIndicatorBar.backdrop.active.png 16 32 16 32
 
 slice IRBubbleBox.backdrop.png 24 96 24 24
 
-slice IRBlueyStrip.backdrop.png 16 16 16 16
+slice IRBlueyStrip.backdrop.png 8 8 8 8
 
 slice IRLightSlider.track.vertical.png 8 0 8 0
 slice IRLightSlider.track.vertical.disabled.png 8 0 8 0
+
+slice IRPlasticyDefaultButton.backdrop.png 8 8 8 8
+slice IRPlasticyDefaultButton.backdrop.active.png 8 8 8 8
+slice IRPlasticyDefaultButton.backdrop.disabled.png 8 8 8 8
 
 
 

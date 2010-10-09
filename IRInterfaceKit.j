@@ -30,6 +30,7 @@
 	@import "IRRazorView.j"
 	@import "IRStripedBar.j"
 	@import "IREmperorBox.j"
+	@import "IRBlueyStrip.j"
 
 
 //	Bars
@@ -58,8 +59,7 @@
 //	Buttons and Button Bars
 	
 	@import "IRTactileButton.j"	
-	@import "IRHUDButton.j"
-	@import "IRHUDButtonBar.j"
+	@import "IRPlasticyButton.j"
 	@import "IRButtonBar.j"
 	@import "IRStripedBar.j"
 
