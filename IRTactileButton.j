@@ -106,8 +106,8 @@
 	[button setValue:[CPColor colorWithWhite:0.25 alpha:0.5] forThemeAttribute:@"text-shadow-color" inState:CPThemeStateDisabled];
 	[button setValue:CGSizeMake(0.0, -1.0) forThemeAttribute:@"text-shadow-offset"];
 	
-	[button setValue:CGSizeMake(0.0, 32.0) forThemeAttribute:@"min-size"];
-	[button setValue:CGSizeMake(-1.0, 64.0) forThemeAttribute:@"max-size"];
+	[button setValue:CGSizeMake(32.0, 32.0) forThemeAttribute:@"min-size"];
+	[button setValue:CGSizeMake(-1.0, 32.0) forThemeAttribute:@"max-size"];
 	
 	[button setClipsToBounds:NO];
 	
