@@ -42,7 +42,7 @@
 //	Text Fields
 
 	@import "IRDarkTextField.j"
-	@import "IRHUDSearchField.j"
+	@import "IRDarkSearchField.j"
 
 
 //	Scroll Views

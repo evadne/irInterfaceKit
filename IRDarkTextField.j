@@ -3,11 +3,11 @@
 	
 	
 	
-	
+		
 	
 @implementation IRDarkTextField : CPTextField
 
-+ (IRTextField) textFieldWithStringValue:(CPString)aStringValue placeholder:(CPString)aPlaceholder width:(float)aWidth {
++ (IRDarkTextField) textFieldWithStringValue:(CPString)aStringValue placeholder:(CPString)aPlaceholder width:(float)aWidth {
 
 	var textField = [super textFieldWithStringValue:aStringValue placeholder:aPlaceholder width:aWidth theme:[CPTheme defaultTheme]]
 	[textField setFrame:CGRectMake(0.0, 0.0, aWidth, 32.0)];

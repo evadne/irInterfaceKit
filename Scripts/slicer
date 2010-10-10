@@ -66,6 +66,10 @@ slice IRPlasticyDefaultButton.backdrop.png 8 8 8 8
 slice IRPlasticyDefaultButton.backdrop.active.png 8 8 8 8
 slice IRPlasticyDefaultButton.backdrop.disabled.png 8 8 8 8
 
+slice IRDarkSearchField.backdrop.png 0 16 0 32
+slice IRDarkSearchField.backdrop.active.png 0 16 0 32
+slice IRDarkSearchField.backdrop.disabled.png 0 16 0 32
+
 
 
 
