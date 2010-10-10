@@ -78,7 +78,7 @@
 	[button setValue:contentInset forThemeAttribute:@"content-inset"];
 	[button setValue:activeContentInset forThemeAttribute:@"content-inset" inState:CPThemeStateHighlighted];
 	
-	[button setValue:[CPFont systemFontOfSize:13.0] forThemeAttribute:@"font"];
+	[button setValue:[CPFont boldSystemFontOfSize:13.0] forThemeAttribute:@"font"];
 	[button setValue:[CPColor colorWithWhite:1.0 alpha:1.0] forThemeAttribute:@"text-color"];
 	[button setValue:[CPColor colorWithWhite:0.95 alpha:0.5] forThemeAttribute:@"text-color" inState:CPThemeStateDisabled];
 
