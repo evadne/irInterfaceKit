@@ -163,6 +163,30 @@
 
 
 
+- (void) animateUsingEffect:(CPViewAnimationKey)inAnimationEffectKey duration:(CPTimeInterval)inDuration curve:(CPAnimationCurve)inCurve delegate:(id)inDelegate {
+	
+	var animation = [[CPViewAnimation alloc] initWithViewAnimations:[
+
+		[CPDictionary dictionaryWithObjectsAndKeys:
+
+ 			self, CPViewAnimationTargetKey, 
+ 			inAnimationEffectKey, CPViewAnimationEffectKey
+
+ 		]
+
+ 	]];	
+
+	[animation setDuration:inDuration];
+	[animation setDelegate:inDelegate];
+	[animation setAnimationCurve:inCurve];
+	[animation startAnimation];
+	
+}
+
+
+
+
+
 @end
 
 
