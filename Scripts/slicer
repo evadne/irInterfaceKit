@@ -70,6 +70,13 @@ slice IRDarkSearchField.backdrop.png 0 16 0 32
 slice IRDarkSearchField.backdrop.active.png 0 16 0 32
 slice IRDarkSearchField.backdrop.disabled.png 0 16 0 32
 
+slice IRPlasticyPopUpButton.backdrop.png 0 32 0 16
+slice IRPlasticyPopUpButton.backdrop.active.png 0 32 0 16
+slice IRPlasticyPopUpButton.backdrop.disabled.png 0 32 0 16
+
+slice IRThickBlueyStrip.backdrop.png 16 16 16 16
+slice IRRecessedNavyBox.backdrop.png 24 24 24 24
+
 
 
 

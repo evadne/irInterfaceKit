@@ -31,6 +31,7 @@
 	@import "IRStripedBar.j"
 	@import "IREmperorBox.j"
 	@import "IRBlueyStrip.j"
+	@import "IRThickBlueyStrip.j"
 
 
 //	Bars
@@ -60,6 +61,7 @@
 	
 	@import "IRTactileButton.j"	
 	@import "IRPlasticyButton.j"
+	@import "IRPlasticyPopUpButton.j"
 	@import "IRButtonBar.j"
 	@import "IRStripedBar.j"
 
