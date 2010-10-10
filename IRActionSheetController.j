@@ -220,7 +220,7 @@
 	var platformWindowFrame = [[[self window] platformWindow] visibleFrame];
 
 	maximumAllowedWidth = platformWindowFrame.size.width - 128;
-	maximumAllowedHeight = platformWindowFrame.size.height - 64;
+	maximumAllowedHeight = platformWindowFrame.size.height - 32;
 
 	
 //	Suggest a frame that simply fits everything.  Notice the frame is not centered.
