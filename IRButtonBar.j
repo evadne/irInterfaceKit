@@ -98,6 +98,37 @@
 
 
 
+- (void) removeCenterButtons {
+	
+	if (!centerButtons) return;
+	
+	var enumerator = [centerButtons objectEnumerator], object = nil;
+	while (object = [enumerator nextObject]) {
+
+		[centerButtons removeObject:object];
+		[object removeFromSuperview];
+	
+	}
+	
+	[self setNeedsLayout];
+	
+}
+
+- (void) addCenterButton:(CPView)aButton {
+		
+	if (!centerButtons)
+	centerButtons = [CPMutableArray array];
+	
+	[centerButtons addObject:aButton];
+	[self addSubview:aButton];
+	[self setNeedsLayout];
+	
+}
+
+
+
+
+
 - (void) removeRightButtons {
 	
 	if (!rightButtons) return;
@@ -158,6 +189,50 @@
 			
 			leftPadding = buttonPadding;
 
+		}
+		
+	}
+	
+	if ([centerButtons count] != 0) {
+		
+		var	enumerator = [centerButtons objectEnumerator], 
+			object = nil, 
+			centerPoint = (CGRectGetWidth([self frame]) / 2),
+			totalWidth = 0;
+			
+		//	Calculate the total width
+		
+		while (object = [enumerator nextObject]) {
+			
+			if ([object isHidden])
+			continue;
+			
+			totalWidth += CGRectGetWidth([object frame]);
+		
+		}
+		
+		totalWidth += buttonPadding * ([centerButtons count] - 1);
+		
+		enumerator = [centerButtons objectEnumerator];
+		object = nil;
+		
+		var startingLeftPoint = centerPoint - totalWidth * 0.5;
+		
+		while (object = [enumerator nextObject]) {
+			
+			if ([object isHidden]) continue;
+			
+			[object setFrameOrigin:CGPointMake(
+				
+				startingLeftPoint, 
+				0
+				
+			)];
+			
+			[object centerVerticallyInSuperview];
+			
+			startingLeftPoint += CGRectGetWidth([object frame]) + buttonPadding;
+			
 		}
 		
 	}
