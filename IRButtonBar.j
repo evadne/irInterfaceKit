@@ -7,8 +7,9 @@
 	
 @implementation IRButtonBar : IRStyledView {
 	
-	CPMutableArray rightButtons;
 	CPMutableArray leftButtons;
+	CPMutableArray centerButtons;
+	CPMutableArray rightButtons;
 	
 	BOOL patterned;
 	
@@ -66,6 +67,37 @@
 
 
 
+- (void) removeLeftButtons {
+	
+	if (!leftButtons) return;
+	
+	var enumerator = [leftButtons objectEnumerator], object = nil;
+	while (object = [enumerator nextObject]) {
+
+		[leftButtons removeObject:object];
+		[object removeFromSuperview];
+	
+	}
+	
+	[self setNeedsLayout];
+	
+}
+
+- (void) addLeftButton:(CPView)aButton {
+		
+	if (!leftButtons)
+	leftButtons = [CPMutableArray array];
+	
+	[leftButtons addObject:aButton];
+	[self addSubview:aButton];
+	[self setNeedsLayout];
+	
+}
+
+
+
+
+
 - (void) removeRightButtons {
 	
 	if (!rightButtons) return;
@@ -90,37 +122,6 @@
 	[rightButtons addObject:aButton];
 	[self addSubview:aButton];
 	
-	[self setNeedsLayout];
-	
-}
-
-
-
-
-
-- (void) removeLeftButtons {
-	
-	if (!leftButtons) return;
-	
-	var enumerator = [leftButtons objectEnumerator], object = nil;
-	while (object = [enumerator nextObject]) {
-
-		[leftButtons removeObject:object];
-		[object removeFromSuperview];
-	
-	}
-	
-	[self setNeedsLayout];
-	
-}
-
-- (void) addLeftButton:(CPView)aButton {
-		
-	if (!leftButtons)
-	leftButtons = [CPMutableArray array];
-	
-	[leftButtons addObject:aButton];
-	[self addSubview:aButton];
 	[self setNeedsLayout];
 	
 }
